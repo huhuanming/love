@@ -32,24 +32,17 @@ const getHeartPoint = (angle) => {
   return [offsetX + x, offsetY + y]
 }
 
+const paddingNum = (number) => `${number}`.padStart(2, '0')
+
 const timeElapse = (date) => {
   const current = Date()
   let seconds = (Date.parse(current) - Date.parse(date)) / 1000
-  const days = Math.floor(seconds / (3600 * 24))
+  const days = paddingNum(Math.floor(seconds / (3600 * 24)))
   seconds %= (3600 * 24)
-  let hours = Math.floor(seconds / 3600)
-  if (hours < 10) {
-    hours = `0${hours}`
-  }
+  const hours = paddingNum(Math.floor(seconds / 3600))
   seconds %= 3600
-  let minutes = Math.floor(seconds / 60)
-  if (minutes < 10) {
-    minutes = `0${minutes}`
-  }
-  seconds %= 60
-  if (seconds < 10) {
-    seconds = `0${seconds}`
-  }
+  const minutes = paddingNum(Math.floor(seconds / 60))
+  seconds = paddingNum(seconds % 60)
   const result = `<span class="digit">${days}</span> 天 <span class="digit">${hours}</span> 小时 <span class="digit">${minutes}</span> 分 <span class="digit">${seconds}</span> 秒`
   document.getElementById('elapseClock').innerHTML = result
 }
@@ -111,13 +104,11 @@ setTimeout(() => {
 }, 0)
 
 const together = new Date()
-together.setFullYear(2015, 8, 15)
+together.setFullYear(2015, 7, 15)
 together.setHours(0)
 together.setMinutes(0)
 together.setSeconds(0)
 together.setMilliseconds(0)
-
-timeElapse(together)
 
 setInterval(() => {
   timeElapse(together)
