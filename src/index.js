@@ -32,7 +32,7 @@ const getHeartPoint = (angle) => {
   return [offsetX + x, offsetY + y]
 }
 
-const paddingNum = (number) => `${number}`.padStart(2, '0')
+const paddingNum = (number) => (number < 10 ? `0${number}` : number)
 
 const timeElapse = (date) => {
   const current = Date()
